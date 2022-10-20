@@ -5,27 +5,28 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.actions.type.Type;
-import net.serenitybdd.screenplay.actions.type.TypeValue;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.Keys;
 
+import static com.alkomprar.userinterfaces.CarritoPage.RECOGER_TIENDA;
 import static com.alkomprar.userinterfaces.ConfirmacionCarritoPage.CERRAR_MODAL;
 import static com.alkomprar.userinterfaces.DetalleArticuloPage.AGREGAR_ELEMENTO_CARRITO;
 import static com.alkomprar.userinterfaces.DetalleArticuloPage.DIV_PRIMER_ELEMENTO;
 import static com.alkomprar.userinterfaces.MenuPage.*;
+import static com.alkomprar.userinterfaces.RecogerArticuloPage.*;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isClickable;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
-public class BuscarYAgregarCarrito implements Task {
+public class RecojerTiendaFisica implements Task {
     private String item;
 
-    public BuscarYAgregarCarrito(String item) {
+    public RecojerTiendaFisica(String item) {
         this.item = item;
     }
 
     public static Performable elemento(String item) {
-        return instrumented(BuscarYAgregarCarrito.class, item);
+        return instrumented(RecojerTiendaFisica.class, item);
     }
 
     @Override
@@ -38,7 +39,12 @@ public class BuscarYAgregarCarrito implements Task {
                 WaitUntil.the(AGREGAR_ELEMENTO_CARRITO, isClickable()),
                 Click.on(AGREGAR_ELEMENTO_CARRITO),
                 WaitUntil.the(CERRAR_MODAL, isClickable()),
-                Click.on(CERRAR_MODAL)
+                Click.on(CERRAR_MODAL),
+                Click.on(CARRITO),
+                Click.on(RECOGER_TIENDA),
+                Click.on(ELEGIR_CIUDAD),
+                Click.on(PRIMER_TIENDA_CIUDAD),
+                Click.on(VOLVER)
         );
     }
 }
